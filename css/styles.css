@@ -9,7 +9,7 @@
 :root {
     --color-primary: #3e54ff;         /* Azul violáceo brillante */
     --color-secondary: #1e2c5b;       /* Azul oscuro/navy */
-    --color-accent: #ff9100;          /* Naranja brillante */
+    --color-accent: #edf81a;          /* Naranja brillante */
     --color-light: #f5f1ea;           /* Crema/beige claro */
     --color-dark: #151c28;            /* Azul muy oscuro casi negro */
     --color-text: #333333;            /* Texto oscuro */
@@ -378,7 +378,7 @@ section {
     font-family: var(--font-main);
     display: inline-block;
     background-color: var(--color-purple);
-    color: white;
+    color: rgb(7, 7, 7);
     padding: 1rem 2.5rem;
     border-radius: 50px;
     text-decoration: none;
@@ -888,7 +888,7 @@ section {
 }
 
 .service-title {
-    font-family: var(--font-accent);  /* Usa la fuente cursiva para "diseño gráfico" */
+    font-family: var(--font-);  /* Usa la fuente cursiva para "diseño gráfico" */
     font-size: 2.2rem;
     margin: 0;
     transition: var(--transition);
@@ -968,7 +968,7 @@ section {
     margin-bottom: 1.5rem;  
     line-height: 1.6;   
 }   
-    
+
 .service-panel:nth-child(2) p,  
 .service-panel:nth-child(2) .service-detail-item {  
     color: white;
@@ -1106,7 +1106,7 @@ section {
 
 .contact-form-container {
     background-color: white;
-    padding: 3rem;
+    padding: 5rem;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
