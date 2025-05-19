@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle del Proyecto</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .titulo-container {
+      background-color: #1e2c5b;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .titulo-container h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    .seccion {
+      background-color: #ffffff;
+      margin: 2rem auto;
+      padding: 2rem;
+      max-width: 1200px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-radius: 10px;
+    }
+
+    .subtitulo {
+      font-size: 1.6rem;
+      color: #222;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .imagenes {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .imagenes img {
+      width: 100%;
+      max-width: 32%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .imagenes img {
+        max-width: 100%;
+      }
+    }
+
+    .btn-volver {
+      display: block;
+      width: fit-content;
+      margin: 3rem auto 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #d9a5ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-volver:hover {
+      background-color: #d9a5ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="titulo-container">
+    <h1 id="titulo">Cargando...</h1>
+  </div>
+
+  <div id="contenedor-proyecto"></div>
+
+  <!-- Botón de regreso -->
+  <a href="index.html" class="btn-volver">← Ver mas proyectos</a>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    const proyectos = {
+      proyecto1: {
+        titulo: "Proyecto 1: Empaque Ecológico",
+        secciones: [
+          {
+            subtitulo: "Fase 1: Investigación",
+            imagenes: [
+              "./img/proyecto1.jpg"
+            ]
+          },
+          {
+            subtitulo: "Fase 2: Diseño Conceptual",
+            imagenes: [
+              "./img/proyecto2.jpg"
+            ]
+          },
+          {
+            subtitulo: "Fase 3: Presentación Final",
+            imagenes: [
+              "./img/proyecto3.jpg"
+            ]
+          }
+        ]
+      },
+
+      proyecto2: {
+        titulo: "Proyecto 2: Identidad Corporativa",
+        secciones: [
+          {
+            subtitulo: "Fase 1: Moodboard",
+            imagenes: [
+              "./img/proyecto2-1a.jpg"
+            ]
+          },
+          {
+            subtitulo: "Fase 2: Desarrollo del logo",
+            imagenes: [
+              "./img/proyecto2-2a.jpg"
+            ]
+          },
+          {
+            subtitulo: "Fase 3: Aplicaciones gráficas",
+            imagenes: [
+              "./img/proyecto2-3a.jpg"
+            ]
+          }
+        ]
+      }, 
+      
+    };
+
+    const proyecto = proyectos[id];
+
+    if (proyecto) {
+      document.getElementById("titulo").textContent = proyecto.titulo;
+
+      const contenedor = document.getElementById("contenedor-proyecto");
+
+      proyecto.secciones.forEach(seccion => {
+        const divSeccion = document.createElement("div");
+        divSeccion.className = "seccion";
+
+        const subtitulo = document.createElement("h2");
+        subtitulo.className = "subtitulo";
+        subtitulo.textContent = seccion.subtitulo;
+
+        const contenedorImgs = document.createElement("div");
+        contenedorImgs.className = "imagenes";
+
+        seccion.imagenes.forEach(src => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = seccion.subtitulo;
+          img.onerror = () => {
+            img.src = "https://via.placeholder.com/300x200?text=Imagen+no+disponible";
+          };
+          contenedorImgs.appendChild(img);
+        });
+
+        divSeccion.appendChild(subtitulo);
+        divSeccion.appendChild(contenedorImgs);
+        contenedor.appendChild(divSeccion);
+      });
+
+    } else {
+      document.getElementById("titulo").textContent = "Proyecto no encontrado";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sundrop Design | Diseñador Gráfico</title>
+    <!-- Asegúrate de que esta ruta sea correcta -->
+    <link rel="stylesheet" href="./css/styles.css">
+    <!-- Fuentes de Google actualizadas -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome desde CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Encabezado y navegación -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="#inicio" class="logo">
+                <!-- Si no tienes logo aún, usa texto temporalmente -->
+                <img src="./img/logo1.png" alt="Logo" class="logo-img" onerror="this.onerror=null; this.innerHTML='Sundrop'; this.style.fontSize='24px'; this.style.fontWeight='bold'; this.style.color='white';">
+            </a>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección de Inicio -->
+    <section id="inicio">
+        <!-- Efecto de red con líneas y puntos -->
+        <div class="network-effect" id="network-effect"></div>
+        
+        <div class="hero-container">
+            <!-- Columna izquierda: Texto -->
+            <div class="hero-content">
+                <div class="title-container">
+                    <h2 class="hero-subtitle">Diseñadora Gráfica & Creativa</h2>
+                    <h1 class="hero-title">Convirtiendo ideas en <span class="highlight-text">experiencias visuales</span> impactantes</h1>
+                </div>
+                
+                <p class="hero-description">Diseño de marca, editorial, web y más para crear identidades que conectan con las audiencias.</p>
+                
+                <div class="hero-btns">
+                    <a href="#proyectos" class="btn">Ver Proyectos</a>
+                    <a href="#contacto" class="btn btn-secondary">Contáctame</a>
+                </div>
+            </div>
+            
+            <!-- Columna derecha: Logo grande -->
+            <div class="hero-logo">
+                <img src="./img/logo-large.png" alt="Sundrop Design Logo" onerror="this.onerror=null; this.src='./img/logo.png';">
+            </div>
+        </div>
+        
+        <a href="#sobre-mi" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Script para animación de red con líneas -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Crear efecto de red con líneas y puntos
+        const networkEffect = document.getElementById('network-effect');
+        if (!networkEffect) return;
+        
+        // Crear puntos
+        const numDots = 20;
+        const dots = [];
+        
+        for (let i = 0; i < numDots; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'network-dot';
+            dot.style.left = `${Math.random() * 100}%`;
+            dot.style.top = `${Math.random() * 100}%`;
+            networkEffect.appendChild(dot);
+            
+            // Almacenar posición de cada punto
+            dots.push({
+                element: dot,
+                x: parseFloat(dot.style.left) / 100 * window.innerWidth,
+                y: parseFloat(dot.style.top) / 100 * window.innerHeight,
+                vx: Math.random() * 0.5 - 0.25,
+                vy: Math.random() * 0.5 - 0.25
+            });
+        }
+        
+        // Crear líneas entre puntos cercanos
+        function drawLines() {
+            // Eliminar líneas anteriores
+            document.querySelectorAll('.network-line').forEach(line => line.remove());
+            
+            for (let i = 0; i < dots.length; i++) {
+                const dot1 = dots[i];
+                
+                for (let j = i + 1; j < dots.length; j++) {
+                    const dot2 = dots[j];
+                    
+                    // Calcular distancia entre puntos
+                    const dx = dot1.x - dot2.x;
+                    const dy = dot1.y - dot2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // Dibujar línea si están lo suficientemente cerca
+                    if (distance < 150) {
+                        const line = document.createElement('div');
+                        line.className = 'network-line';
+                        
+                        // Posicionar y dimensionar la línea
+                        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                        
+                        line.style.width = `${distance}px`;
+                        line.style.left = `${dot2.x}px`;
+                        line.style.top = `${dot2.y}px`;
+                        line.style.transform = `rotate(${angle}deg)`;
+                        line.style.height = '1px';
+                        
+                        // Opacidad basada en la distancia
+                        line.style.opacity = (1 - distance / 150) * 0.5;
+                        
+                        networkEffect.appendChild(line);
+                    }
+                }
+            }
+        }
+        
+        // Función para mover los puntos
+        function moveDots() {
+            for (let dot of dots) {
+                // Actualizar posición
+                dot.x += dot.vx;
+                dot.y += dot.vy;
+                
+                // Rebotar en los bordes
+                if (dot.x < 0 || dot.x > window.innerWidth) dot.vx *= -1;
+                if (dot.y < 0 || dot.y > window.innerHeight) dot.vy *= -1;
+                
+                // Aplicar posición al elemento
+                dot.element.style.left = `${dot.x}px`;
+                dot.element.style.top = `${dot.y}px`;
+            }
+            
+            // Actualizar líneas
+            drawLines();
+            
+            // Continuar animación
+            requestAnimationFrame(moveDots);
+        }
+        
+        // Iniciar animación
+        moveDots();
+        
+        // Ajustar al redimensionar ventana
+        window.addEventListener('resize', function() {
+            for (let dot of dots) {
+                dot.x = parseFloat(dot.element.style.left) / 100 * window.innerWidth;
+                dot.y = parseFloat(dot.element.style.top) / 100 * window.innerHeight;
+            }
+        });
+    });
+    </script>
+
+    <!-- Sección Sobre Mí -->
+    <section id="sobre-mi">
+        <div class="about-shape"></div>
+        <div class="container">
+            <span class="section-subtitle"></span>
+            <h2 class="section-title">Sobre Mí</h2>
+            
+            <div class="about-content">
+                <div class="about-img-container reveal">
+                    <img src="./img/perfil.jpg" alt="Mi foto" class="about-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x600?text=Tu+Foto';">
+                </div>
+                <div class="about-text reveal">
+                    <h3>Diseñadora gráfica con mirada estratégica y creativa</h3>
+                    <p>Soy Stephany Coca, diseñadora gráfica y fotógrafa boliviana.
+A través de Sundrop Design doy vida a marcas, ideas y emociones con un enfoque visual sensible, narrativo y con propósito.</p>
+                    <p>Me inspiran los símbolos, el color y la belleza de los detalles. Trabajo con marcas emergentes, proyectos creativos y personas que quieren comunicar con el corazón.
+Creo en el diseño como un puente entre lo que sentimos y lo que mostramos al mundo.
+Si conectas con esta visión, me encantaría que trabajemos junt@s.
+
+</p>
+                    
+                    <div class="skills">
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Adobe Photoshop</span>
+                                <span class="skill-percentage">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Adobe Illustrator</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Adobe InDesign</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Producción y edición de fotografía</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Producción de video</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Ilustración</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Proyectos -->
+    <!-- Sección de Proyectos (Manteniendo el diseño original pero con funcionalidad mejorada) -->
+<section id="proyectos">
+    <div class="container">
+        <span class="section-subtitle"></span>
+        <h2 class="section-title">Mis Proyectos</h2>
+        
+        <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="logo-folio">Logo Folio</button>
+            <button class="filter-btn" data-filter="proyectos-integrales">Proyectos Integrales</button>
+            <button class="filter-btn" data-filter="identidad-visual">Identidad Visual</button>
+            <button class="filter-btn" data-filter="diseno-editorial">Diseño Editorial</button>
+            <button class="filter-btn" data-filter="ilustracion">Ilustración</button>
+            <button class="filter-btn" data-filter="empaques">Empaques</button>
+            <button class="filter-btn" data-filter="fotografia">Fotografía</button>
+            <button class="filter-btn" data-filter="posters">Posters</button>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- Proyectos de Logo Folio -->
+            <div class="project-card" data-category="logo-folio">
+                <div class="project-img-container">
+                    <img src="./img/proyecto1.jpg" alt="Logo Empresa A" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Logo+Folio+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Logo Folio</span>
+                    <h3 class="project-title">Logo Folio</h3>
+                    <p class="project-description">Colección de logotipos diseñados para diferentes marcas y proyectos. Muestra el enfoque creativo, la versatilidad y el estilo visual aplicado en la construcción de identidades gráficas únicas.</p>
+                    <div class="project-tags">
+                        <span class="tag">Logo</span>
+                        <span class="tag">Minimalista</span>
+                        <span class="tag">Tecnología</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Proyectos Integrales -->
+            <div class="project-card" data-category="proyectos-integrales">
+                <div class="project-img-container">
+                    <img src="./img/proyecto2.jpg" alt="Proyecto Integral 1" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Proyecto+Integral+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Proyectos Integrales</span>
+                    <h3 class="project-title">Proyectos Integrales</h3>
+                    <p class="project-description">Desarrollo completo de identidad visual y comunicación para marcas. Incluye desde el diseño del logotipo hasta aplicaciones como papelería, empaques, redes sociales y más.</p>
+                    <div class="project-tags">
+                        <span class="tag">Branding</span>
+                        <span class="tag">Packaging</span>
+                        <span class="tag">Decoración</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Identidad Visual -->
+            <div class="project-card" data-category="identidad-visual">
+                <div class="project-img-container">
+                    <img src="./img/proyecto2.jpg" alt="Identidad Visual 1" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Identidad+Visual+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Identidad Visual</span>
+                    <h3 class="project-title">Identidad Visual</h3>
+                    <p class="project-description">Diseño de elementos gráficos que representan la personalidad de una marca. Incluye logotipo, paleta de colores, tipografías y aplicaciones visuales para una comunicación coherente y atractiva.</p>
+                    <div class="project-tags">
+                        <span class="tag">Identidad</span>
+                        <span class="tag">Wellness</span>
+                        <span class="tag">Minimalista</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diseño Editorial -->
+            <div class="project-card" data-category="diseno-editorial">
+                <div class="project-img-container">
+                    <img src="./img/proyecto1.jpg" alt="Diseño Editorial 1" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Diseño+Editorial+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Diseño Editorial</span>
+                    <h3 class="project-title">Diseño Editorial</h3>
+                    <p class="project-description">Creación y maquetación de publicaciones impresas o digitales como revistas, libros y periódicos. Se enfoca en la composición visual, jerarquía, tipografía e imagen para una lectura clara y atractiva.</p>
+                    <div class="project-tags">
+                        <span class="tag">Editorial</span>
+                        <span class="tag">Revista</span>
+                        <span class="tag">Tipografía</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ilustración -->
+            <div class="project-card" data-category="ilustracion">
+                <div class="project-img-container">
+                    <img src="./img/proyecto2.jpg" alt="Ilustración 1" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Ilustración+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Ilustración</span>
+                    <h3 class="project-title">Ilustración</h3>
+                    <p class="project-description">Desarrollo de imágenes visuales para complementar y comunicar ideas en proyectos como libros, patrones, empaques y piezas gráficas. Explora distintos estilos y técnicas según el objetivo del diseño.</p>
+                    <div class="project-tags">
+                        <span class="tag">Digital</span>
+                        <span class="tag">Naturaleza</span>
+                        <span class="tag">Campaña</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Empaques -->
+            <div class="project-card" data-category="empaques">
+                <div class="project-img-container">
+                    <img src="./img/proyecto3.jpg" alt="Empaque 1" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Empaque+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Empaques</span>
+                    <h3 class="project-title">Empaques</h3>
+                    <p class="project-description">Diseño de envoltorios y presentaciones visuales para productos, combinando funcionalidad y estética. Busca destacar la marca, atraer al consumidor y comunicar el valor del producto de forma creativa.</p>
+                    <div class="project-tags">
+                        <span class="tag">Packaging</span>
+                        <span class="tag">Sostenible</span>
+                        <span class="tag">Ecológico</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fotografía -->
+            <div class="project-card" data-category="fotografia">
+                <div class="project-img-container">
+                    <img src="./img/proyecto2.jpg" alt="Fotografía 1" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Fotografía+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Fotografía</span>
+                    <h3 class="project-title">Fotografía</h3>
+                    <p class="project-description">Producción de imágenes que documentan, comunican y fortalecen proyectos visuales. Incluye fotografía publicitaria, documental y de retrato, adaptada a distintas necesidades estéticas y narrativas.</p>
+                    <div class="project-tags">
+                        <span class="tag">Moda</span>
+                        <span class="tag">Campaña</span>
+                        <span class="tag">Minimalista</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Posters -->
+            <div class="project-card" data-category="posters">
+                <div class="project-img-container">
+                    <img src="./img/proyecto2.jpg" alt="Poster 1" class="project-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Poster+1';">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            
+                            <a href="detalle.html?id=proyecto1" class="project-link"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Posters</span>
+                    <h3 class="project-title">Posters</h3>
+                    <p class="project-description">Diseño de piezas gráficas para comunicar mensajes, eventos o conceptos de forma visual e impactante. Combina tipografía, imagen y composición para captar la atención y transmitir una idea clara.</p>
+                    <div class="project-tags">
+                        <span class="tag">Festival</span>
+                        <span class="tag">Cultura</span>
+                        <span class="tag">Urbano</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Sección de Servicios -->
+    <!-- Sección de Servicios (Modificada) -->
+<section id="servicios">
+    <div class="container">
+        <span class="section-subtitle"></span>
+        <h2 class="section-title">Mis Servicios</h2>
+        
+        <div class="services-accordion">
+            <!-- Servicio 1: Diseño Gráfico -->
+            <div class="service-panel" style="background-color: var(--color-purple-light);">
+                <div class="service-header">
+                    <h3 class="service-title">diseño gráfico</h3>
+                    <button class="expand-btn"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="service-content">
+                    <p>Creación de identidades visuales memorables y funcionales que reflejan la esencia de tu negocio y conectan con tu audiencia. Incluye diseño de logos, papelería corporativa, manuales de marca y aplicaciones.</p>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Logos y branding</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Papelería corporativa</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Diseño editorial</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Publicidad impresa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Servicio 2: Fotografía -->
+            <div class="service-panel" style="background-color: var(--color-secondary);">
+                <div class="service-header">
+                    <h3 class="service-title">fotografía</h3>
+                    <button class="expand-btn"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="service-content">
+                    <p>Sesiones fotográficas profesionales para productos, retratos corporativos, eventos y más. Capturamos la esencia de tu marca y creamos imágenes de alta calidad para potenciar tu comunicación visual.</p>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Fotografía de producto</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Retratos profesionales</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Eventos corporativos</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Edición y retoque</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Servicio 3: Redes Sociales -->
+            <div class="service-panel" style="background-color: var(--color-yellow);">
+                <div class="service-header">
+                    <h3 class="service-title">redes sociales</h3>
+                    <button class="expand-btn"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="service-content">
+                    <p>Estrategias de contenido visual para redes sociales que captan la atención de tu audiencia. Creamos posts, historias, carruseles y otros formatos adaptados a cada plataforma para potenciar tu presencia digital.</p>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Diseño de posts</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Contenido para stories</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Plantillas personalizadas</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Banners y anuncios</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Puedes añadir más servicios siguiendo el mismo patrón -->
+        </div>
+    </div>
+</section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto">
+        <div class="container">
+            <span class="section-subtitle"></span>
+            <h2 class="section-title">Contacto</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info reveal">
+                    <h3 class="contact-title">¿Tienes un proyecto en mente?</h3>
+                    <p class="contact-text">Estoy disponible para trabajar en tu proyecto y ayudarte a llevarlo al siguiente nivel. Completa el formulario o contáctame directamente a través de los siguientes medios.</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Ubicación</h4>
+                            <p>Cochabamba, Bolivia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Email</h4>
+                            <p>sundrop.design7gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Teléfono</h4>
+                            <p>+591 65730318</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <a href="https://www.instagram.com/sundrop.dg" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@sundrop.dg_" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://pin.it/3ss8uSqUr" target="_blank" class="social-link"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61575840251909" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container reveal">
+                    <!-- Formulario simple que puedes conectar con formspree.io más tarde -->
+                    <form class="contact-form" action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder=" " required>
+                            <label for="nombre" class="form-label">Nombre</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
+                            <label for="email" class="form-label">Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="asunto" name="asunto" placeholder=" ">
+                            <label for="asunto" class="form-label">Asunto</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="mensaje" name="mensaje" placeholder=" " required></textarea>
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                        </div>
+                        <button type="submit" class="btn form-submit">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <img src="./img/logo2.png" alt="Logo" class="footer-logo" onerror="this.onerror=null; this.innerHTML='Sundrop Design'; this.style.fontSize='24px'; this.style.fontWeight='bold'; this.style.color='white';">
+                    <p>Soy una diseñadora gráfica apasionada por crear soluciones visuales impactantes que conecten con las audiencias y potencien los mensajes de mis clientes.</p>
+                    
+                    <!-- Íconos de redes sociales en el footer -->
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/sundrop.dg" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@sundrop.dg_" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://pin.it/3ss8uSqUr" target="_blank" class="social-link"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61575840251909" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-mi">Sobre Mí</a></li>
+                        <li><a href="#proyectos">Proyectos</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#servicios">Diseño de Marca</a></li>
+                        <li><a href="#servicios">Diseño Editorial</a></li>
+                        <li><a href="#servicios">Diseño Web/UI</a></li>
+                        <li><a href="#servicios">Ilustración</a></li>
+                        <li><a href="#servicios">Packaging</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Contacto</h3>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                        <span>Cochabamba, Bolivia</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope footer-contact-icon"></i>
+                        <span>sundrop.design7gmail.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt footer-contact-icon"></i>
+                        <span>+591 65730318</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sundrop Design | Diseñadora Gráfica. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#header" class="scroll-to-top" id="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Particles.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <!-- JavaScript principal -->
+    <script src="./js/main.js"></script>
+</body>
+</html>
