@@ -888,7 +888,7 @@ section {
 }
 
 .service-title {
-    font-family: var(--font-);  /* Usa la fuente cursiva para "diseño gráfico" */
+    font-family: var(--font-heading);  /* Usa la fuente cursiva para "diseño gráfico" */
     font-size: 2.2rem;
     margin: 0;
     transition: var(--transition);
