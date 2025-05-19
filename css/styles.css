@@ -965,12 +965,12 @@ section {
 }
 
 .service-panel p {
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.service-panel:nth-child(2) p,
-.service-panel:nth-child(2) .service-detail-item {
+    margin-bottom: 1.5rem;  
+    line-height: 1.6;   
+}   
+    
+.service-panel:nth-child(2) p,  
+.service-panel:nth-child(2) .service-detail-item {  
     color: white;
 }
 
