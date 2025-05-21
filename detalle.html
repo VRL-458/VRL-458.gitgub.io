@@ -13,7 +13,7 @@
     }
 
     .titulo-container {
-      background-color: #fff;
+      background-color: #1e2c5b;
       padding: 2rem 1rem;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -22,7 +22,7 @@
     .titulo-container h1 {
       margin: 0;
       font-size: 2.2rem;
-      color: #333;
+      color: #f1f1f1;
     }
 
     .seccion {
@@ -112,80 +112,129 @@
     const id = params.get("id");
 
     const proyectos = {
-      proyecto1: {
-        titulo: "Proyecto 1: Empaque Ecológico",
+
+      proyectoBazar: {
+        titulo: "EL BAZAR",
         secciones: [
           {
-            subtitulo: "Fase 1: Investigación",
+            //subtitulo: "Poster 1",
             imagenes: [
-              "./img/proyecto1.jpg"
-            ]
-          },
-          {
-            subtitulo: "Fase 2: Diseño Conceptual",
-            imagenes: [
-              "./img/proyecto2.jpg"
-            ]
-          },
-          {
-            subtitulo: "Fase 3: Presentación Final",
-            imagenes: [
-              "./img/proyecto3.jpg"
+              "./proyectos/EL BAZZAR/EL BAZZAR-02.png", 
+              "./proyectos/EL BAZZAR/EL BAZZAR-03.png", 
+              "./proyectos/EL BAZZAR/EL BAZZAR-04.png", 
+              "./proyectos/EL BAZZAR/EL BAZZAR-05.png", 
+              "./proyectos/EL BAZZAR/EL BAZZAR-06.png", 
+              "./proyectos/EL BAZZAR/EL BAZZAR-07.png", 
+              "./proyectos/EL BAZZAR/EL BAZZAR-08.png", 
+              "./proyectos/EL BAZZAR/EL BAZZAR-09.png"
             ]
           }
         ]
       },
-
-      proyectoPosters: {
-        titulo: "Posters",
+      proyectoLitionix: {
+        titulo: "LITIONIX",
         secciones: [
           {
-            subtitulo: "Poster 1",
+            
             imagenes: [
-              "./proyectos/POSTERS/_Poster_Mockup_no_1.png"
-            ]
-          },
-          {
-            subtitulo: "Poster 2",
-            imagenes: [
-              "./proyectos/POSTERS/Glued_Poster_Mockup_no_1.png"
-            ]
-          },{
-            subtitulo: "Poster 3",
-            imagenes: [
-              "./proyectos/POSTERS/PoBster_Mockup_no_1.png"
-            ]
-          },{
-            subtitulo: "Poster 4",
-            imagenes: [
-              "./proyectos/POSTERS/PosterMockup.png"
-            ]
-          },{
-            subtitulo: "Poster 5",
-            imagenes: [
-              "./proyectos/POSTERS/Poster_MockuP1.png"
-            ]
-          },{
-            subtitulo: "Poster 6",
-            imagenes: [
-              "./proyectos/POSTERS/_Poster_Mockup_no_1.png"
-            ]
-          },
-          {
-            subtitulo: "Poster 7",
-            imagenes: [
-              "./proyectos/POSTERS/PPoster_Mockup_no_1.png"
-            ]
-          },
-          {
-            subtitulo: "Poster 8",
-            imagenes: [
-              "./proyectos/POSTERS/_Poster_Mockup_no_1.png"
+              "./proyectos/LITIONIX/LITIONIX-02 (1).png", 
+              "./proyectos/LITIONIX/LITIONIX-02-02.png", 
+              "./proyectos/LITIONIX/LITIONIX-02.png", 
+              "./proyectos/LITIONIX/LITIONIX-03.png", 
+              "./proyectos/LITIONIX/LITIONIX-04.png", 
             ]
           }
         ]
-      }
+      },
+      proyectoEditorial: {
+        titulo: "REVISTA PUEBLOARTE",
+        secciones: [
+          {
+            
+            imagenes: [
+              "./proyectos/revista PueblArte/A4_Brochure_lMockup_6.png", 
+              "./proyectos/revista PueblArte/A4_Brochure_Mocjkup_6.png", 
+              "./proyectos/revista PueblArte/A4_Brochure_Mockupn_6.png", 
+              "./proyectos/revista PueblArte/A4_Brochure_Mockupp_6.png", 
+              "./proyectos/revista PueblArte/A4_Brochure_Mockup_6.png", 
+              "./proyectos/revista PueblArte/A4_kBrochure_Mockup_6.png", 
+              "./proyectos/revista PueblArte/Letter Magazine Mock.png", 
+              "./proyectos/revista PueblArte/A4_Brochure_lMockup_6.png", 
+              "./proyectos/revista PueblArte/Letter Magazine Mockn.png", 
+              "./proyectos/revista PueblArte/Letter Magazine MocknSF.png", 
+              "./proyectos/revista PueblArte/Letter Magazine Mockup - Free Version.png", 
+              "./proyectos/revista PueblArte/Letter Magazine Mockup .png", 
+              "./proyectos/revista PueblArte/Letter Magazine MockupSF .png", 
+              "./proyectos/revista PueblArte/Letter Magazinmc.png", 
+              "./proyectos/revista PueblArte/A4_Brochure_lMockup_6.png", 
+              "./proyectos/revista PueblArte/Letter MagazinmcSF.png"
+          ]
+        }
+        ]
+      },
+      proyectoLibro: {
+        titulo: "FERIA DEL LIBRO",
+        secciones: [
+          {
+            
+            imagenes: [
+              "./proyectos/FERIA DEL LIBRO/Glued_Poster_Mockup_no_1.png", 
+              "./proyectos/FERIA DEL LIBRO/Poster_Mockup_no_1.png"
+            ]
+          }
+        ]
+      },
+      proyectoEmpaques: {
+        titulo: "EMPAQUES",
+        secciones: [
+          {  
+            imagenes: [
+              "./proyectos/empaques/01.png", 
+              "./proyectos/empaques/hocolate Design Mockup.png", 
+              "./proyectos/empaques/weird yerba.png", 
+              "./proyectos/empaques/weird yerba0.png", 
+              "./proyectos/empaques/weird yerba2.png", 
+              "./proyectos/empaques/weird yerba2p.png", 
+              "./proyectos/empaques/weird yerba3.png", 
+              "./proyectos/empaques/weird yerbla0.png", 
+              "./proyectos/empaques/White_Wine_Bottle2.png"
+            ]
+          }
+        ]
+      },
+      proyectoFotografia: {
+        titulo: "FOTOGRAFIA",
+        secciones: [
+          {
+            
+            imagenes: [
+              "./proyectos/fotografia/Post Card Mockup.png", 
+              
+            ]
+          }
+        ]
+      },
+       proyectoPosters: {
+        titulo: "POSTERS",
+        secciones: [
+          {
+            
+            imagenes: [
+              "./proyectos/POSTERS/Glued_Poster_Mockuo_1.png", 
+              "./proyectos/POSTERS/Glued_Poster_Mockup_no_1.png", 
+              "./proyectos/POSTERS/PoBster_Mockup_no_1.png", 
+              "./proyectos/POSTERS/PosterMockup.png", 
+              "./proyectos/POSTERS/Poster_MockuP1.png", 
+              "./proyectos/POSTERS/Poster_Mockup_no_1.png", 
+              "./proyectos/POSTERS/PPPoster_Mockup_no_1.png", 
+              "./proyectos/POSTERS/_Poster_Mockup_no_1.png", 
+              
+            ]
+          }
+        ]
+      },
     };
+
 
     const proyecto = proyectos[id];
 
